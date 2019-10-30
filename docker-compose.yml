@@ -1,0 +1,61 @@
+version: '3'
+services:
+  php72:
+    container_name: php7.2
+    stdin_open: true
+    tty: true
+    build:
+      context: ./dockerfiles
+      dockerfile: PHP72.DockerFile
+    ports:
+      - "80:80"
+      - "443:443"
+      - "9009:9000"
+      - "22:22"
+    restart: always
+    volumes:
+      - ../:/var/www/localhost
+  mariadb:
+    image: mariadb
+    restart: always
+    stdin_open: true
+    tty: true
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_DATABASE: "dbtest"
+      MYSQL_USER: "dbtest"
+      MYSQL_PASSWORD: "123456"
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    volumes:
+      - ./database:/var/lib/mysql
+  phpmyadmin:
+    depends_on:
+      - mariadb
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: mariadb
+      MYSQL_ROOT_PASSWORD: '123456'
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - "6379:6379"
+    expose:
+      - "6379"
+  laravel-echo-server:
+    container_name: laravel-echo-server
+    build:
+      context: ./dockerfiles
+      dockerfile: LaravelEchoServer.DockerFile
+    ports:
+      - "6001:6001"
+    depends_on:
+      - redis
+    restart: always
