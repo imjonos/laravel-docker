@@ -1,3 +1,4 @@
+
 version: '3'
 services:
   php72:
@@ -10,7 +11,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
-      - "9009:9000"
+    #  - "9009:9000"
       - "22:22"
     restart: always
     volumes:
@@ -21,17 +22,17 @@ services:
     stdin_open: true
     tty: true
     environment:
-      MYSQL_ROOT_PASSWORD: "123456"
-      MYSQL_DATABASE: "dbtest"
-      MYSQL_USER: "dbtest"
-      MYSQL_PASSWORD: "123456"
+      MYSQL_ROOT_PASSWORD: "docker"
+      MYSQL_DATABASE: "docker"
+      MYSQL_USER: "docker"
+      MYSQL_PASSWORD: "docker"
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
     ports:
       - "3306:3306"
     expose:
       - "3306"
     volumes:
-      - ./database:/var/lib/mysql
+    - ./database:/var/lib/mysql
   phpmyadmin:
     depends_on:
       - mariadb
@@ -41,7 +42,7 @@ services:
       - 8080:80
     environment:
       PMA_HOST: mariadb
-      MYSQL_ROOT_PASSWORD: '123456'
+      MYSQL_ROOT_PASSWORD: "docker"
   redis:
     container_name: redis
     image: redis

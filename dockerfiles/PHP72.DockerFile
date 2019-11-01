@@ -7,6 +7,7 @@ RUN apt-get install -y \
     git \
     zip \
     curl \
+    gnupg \
     sudo \
     unzip \
     mc \
@@ -20,6 +21,12 @@ RUN apt-get install -y \
     libfreetype6-dev \
     openssh-server \
     g++
+
+RUN apt-get install -y libatk-bridge2.0-0 gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
+
+RUN curl -sL https://deb.nodesource.com/setup_13.x  | bash -
+RUN apt-get -y install nodejs
+
 
 RUN a2enmod rewrite headers
 
@@ -40,7 +47,7 @@ RUN docker-php-ext-install \
 
 # Install xdebug
 RUN pecl install xdebug-2.6.0 && docker-php-ext-enable xdebug
-COPY ./config/xdebug.ini /etc/php/7.2/mods-available/xdebug.ini
+COPY ./config/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/
 
 # composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
