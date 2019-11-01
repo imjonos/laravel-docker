@@ -1,4 +1,3 @@
-
 version: '3'
 services:
   php72:
@@ -11,7 +10,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    #  - "9009:9000"
+    #  - "9001:9000"
       - "22:22"
     restart: always
     volumes:
