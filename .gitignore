@@ -1,2 +1,7 @@
-database
+./database
+elasticdata
+.env
+.env.prod
 !laravel-echo-server.json
+!production-config/.env
+.idea

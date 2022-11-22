@@ -1,61 +1,75 @@
 version: '3'
 services:
-  php72:
-    container_name: php7.2
+  webserver:
+    container_name: webserver${NAME_PPREFIX}
     stdin_open: true
     tty: true
     build:
-      context: ./dockerfiles
-      dockerfile: PHP72.DockerFile
+      context: ./
+      dockerfile: Apache.DockerFile
+      args:
+        - 'INSTALL_MC=${INSTALL_MC}'
+        - 'INSTALL_SSH=${INSTALL_SSH}'
+        - 'INSTALL_GIT=${INSTALL_GIT}'
+        - 'INSTALL_XDEBUG=${INSTALL_XDEBUG}'
+        - 'INSTALL_CRON=${INSTALL_CRON}'
+        - 'USER=${APACHE2_OS_USER}'
+        - 'PW=${APACHE2_OS_PASSWORD}'
+        - 'INSTALL_TYPE=${APACHE2_VOLUME_INSTALL_TYPE}'
+        - 'ROOT_PW=${APACHE2_OS_ROOT_PASSWORD}'
     ports:
-      - "80:80"
-      - "443:443"
-    #  - "9001:9000"
-      - "22:22"
+      - '${APACHE2_HTTP_PORT}:80'
+      - '${APACHE2_HTTPS_PORT}:443'
+      - '${SSH_PORT}:22'
     restart: always
     volumes:
-      - ../:/var/www/localhost
+      - '${APACHE2_VOLUME}:/.${APACHE2_VOLUME_INSTALL_TYPE:-/var/www/localhost}'
   mariadb:
+    container_name: mariadb${NAME_PPREFIX}
     image: mariadb
     restart: always
     stdin_open: true
     tty: true
+    command: '--max_allowed_packet=32505856'
     environment:
-      MYSQL_ROOT_PASSWORD: "docker"
-      MYSQL_DATABASE: "docker"
-      MYSQL_USER: "docker"
-      MYSQL_PASSWORD: "docker"
-      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+      MYSQL_DATABASE: '${MYSQL_DATABASE}'
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
+      MYSQL_ALLOW_EMPTY_PASSWORD: '${MYSQL_ALLOW_EMPTY_PASSWORD}'
     ports:
-      - "3306:3306"
+      - '${MYSQL_PORT}:3306'
     expose:
-      - "3306"
+      - '3306'
     volumes:
-    - ./database:/var/lib/mysql
+      - '${MYSQL_VOLUME}:/var/lib/mysql'
   phpmyadmin:
+    container_name: phpmyadmin${NAME_PPREFIX}
     depends_on:
       - mariadb
     image: phpmyadmin/phpmyadmin
     restart: always
     ports:
-      - 8080:80
+      - '${PHPMYADMIN_PORT}:80'
     environment:
       PMA_HOST: mariadb
-      MYSQL_ROOT_PASSWORD: "docker"
-  redis:
-    container_name: redis
-    image: redis
-    ports:
-      - "6379:6379"
-    expose:
-      - "6379"
+      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+      UPLOAD_LIMIT: 3000000000
   laravel-echo-server:
-    container_name: laravel-echo-server
+    container_name: laravel-echo-server${NAME_PPREFIX}
     build:
-      context: ./dockerfiles
+      context: ./
       dockerfile: LaravelEchoServer.DockerFile
     ports:
-      - "6001:6001"
+      - '${ECHO_SERVER_PORT}:6001'
     depends_on:
       - redis
     restart: always
+  redis:
+    container_name: redis${NAME_PPREFIX}
+    image: redis
+    restart: always
+    ports:
+      - ${REDIS_PORT}:6379
+    expose:
+      - "6379"
