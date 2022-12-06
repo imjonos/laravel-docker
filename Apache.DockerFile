@@ -16,6 +16,7 @@ RUN apt-get install -y \
     libbz2-dev \
     libpng-dev \
     libjpeg-dev \
+    libjpeg62-turbo-dev \
     libzip-dev\
     libmcrypt-dev \
     libreadline-dev \
@@ -30,6 +31,9 @@ RUN apt-get install -y \
 
 RUN a2enmod rewrite headers
 
+RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg --with-webp
+RUN docker-php-ext-install -j$(nproc) gd
+
 RUN docker-php-ext-install \
     bz2 \
     intl \
@@ -40,7 +44,6 @@ RUN docker-php-ext-install \
     curl \
     calendar \
     mbstring \
-    gd \
     soap \
     exif \
     pdo \
