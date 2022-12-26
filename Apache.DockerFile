@@ -16,6 +16,7 @@ RUN apt-get install -y \
     libbz2-dev \
     libpng-dev \
     libjpeg-dev \
+    libwebp-dev \
     libjpeg62-turbo-dev \
     libzip-dev\
     libmcrypt-dev \
