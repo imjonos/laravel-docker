@@ -28,6 +28,9 @@ if [ "$3" = 'standalone' ]; then
   sudo echo "DB_PASSWORD=$9" >> /var/www/localhost/.env
 fi
 
+echo ">>>>>> php artisan key:generate <<<<<<"
+php artisan key:generate
+
 echo ">>>>>> START Apache <<<<<<"
 sudo service apache2 start
 echo ">>>>>> START SUPERVISOR <<<<<<"
