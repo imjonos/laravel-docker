@@ -33,8 +33,11 @@ php artisan key:generate
 
 echo ">>>>>> START Apache <<<<<<"
 sudo service apache2 start
-echo ">>>>>> START SUPERVISOR <<<<<<"
-sudo service supervisor start;
+
+if [ "$3" = 'true' ]; then
+  echo ">>>>>> START SUPERVISOR <<<<<<"
+  sudo service supervisor start;
+fi
 
 if [ "$1" = 'true' ]; then
   echo ">>>>>> START SSH <<<<<<"
