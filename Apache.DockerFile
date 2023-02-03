@@ -98,6 +98,10 @@ RUN  if [ ${INSTALL_SSH} = true ]; then \
 ;fi
 
 ARG INSTALL_SUPERVISOR=true
+# supervisor install
+RUN  if [ ${INSTALL_SUPERVISOR} = true ]; then \
+    apt-get install -y supervisor \
+;fi
 
 ARG INSTALL_CRON=false
 #CRON
