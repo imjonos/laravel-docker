@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /var/www/localhost;
+cd /var/www/localhost
 
 sudo chown -R docker  /var/www/localhost/storage
 sudo chgrp -R www-data  /var/www/localhost/storage
@@ -16,6 +16,10 @@ sudo chgrp -R docker  /var/www/localhost/vendor
 sudo chmod -R 755  /var/www/localhost/vendor
 
 composer update
+
+sudo chown docker  /var/www/localhost/composer.lock
+sudo chgrp docker  /var/www/localhost/composer.lock
+sudo chmod 755  /var/www/localhost/composer.lock
 
 if [ "$3" = 'standalone' ]; then
   echo ">>>>>> STANDALONE <<<<<<"
@@ -42,7 +46,7 @@ sudo service apache2 start
 
 if [ "$3" = 'true' ]; then
   echo ">>>>>> START SUPERVISOR <<<<<<"
-  sudo service supervisor start;
+  sudo service supervisor start
 fi
 
 if [ "$1" = 'true' ]; then
@@ -55,7 +59,7 @@ php artisan migrate
 
 if [ "$2" = 'true' ]; then
   echo ">>>>>> START CRON <<<<<<"
-  sudo cron && tail -f /var/log/cron.log;
+  sudo cron && tail -f /var/log/cron.log
 fi
 
 set -e
