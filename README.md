@@ -9,7 +9,7 @@
 
 <b>Default http port:</b><br>
 APACHE2_HTTP_PORT=8081<br>
-App will be availible here http://localhost:8081<br>
+App will be available here http://localhost:8081<br>
 <br>
 <b>Default MariaDB port:</b> <br>
 MYSQL_PORT=3307 <br>
