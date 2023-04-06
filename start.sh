@@ -2,11 +2,11 @@
 
 cd /var/www/localhost;
 
-sudo chown -R www-data  /var/www/localhost/storage
-sudo chgrp -R docker  /var/www/localhost/storage
+sudo chown -R docker  /var/www/localhost/storage
+sudo chgrp -R www-data  /var/www/localhost/storage
 sudo chmod -R 775  /var/www/localhost/storage
-sudo chown -R www-data  /var/www/localhost/bootstrap
-sudo chgrp -R docker  /var/www/localhost/bootstrap
+sudo chown -R docker  /var/www/localhost/bootstrap
+sudo chgrp -R www-data  /var/www/localhost/bootstrap
 sudo chmod -R 775  /var/www/localhost/bootstrap
 
 composer update
