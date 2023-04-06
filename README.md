@@ -28,7 +28,7 @@ PASSWORD: docker<br>
 <br>
 <b>Default phpmyadmin port:</b><br>
 PHPMYADMIN_PORT=8080<br>
-Phpmyadmin will be availible here http://localhost:8080<br>
+Phpmyadmin will be available here http://localhost:8080<br>
 <br>
 <b>Default redis port:</b><br>
 REDIS_PORT=6380<br>
