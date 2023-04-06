@@ -6,6 +6,7 @@
 - copy .env.example to .env
 - docker-compose build
 - docker-compose up
+- enjoy!
 
 <b>Default http port:</b><br>
 APACHE2_HTTP_PORT=8081<br>
