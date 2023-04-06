@@ -9,6 +9,12 @@ sudo chown -R docker  /var/www/localhost/bootstrap
 sudo chgrp -R www-data  /var/www/localhost/bootstrap
 sudo chmod -R 775  /var/www/localhost/bootstrap
 
+sudo mkdir -p /var/www/localhost/vendor
+
+sudo chown -R docker  /var/www/localhost/vendor
+sudo chgrp -R docker  /var/www/localhost/vendor
+sudo chmod -R 755  /var/www/localhost/vendor
+
 composer update
 
 if [ "$3" = 'standalone' ]; then
