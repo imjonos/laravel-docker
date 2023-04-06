@@ -1,4 +1,4 @@
-./database
+database
 elasticdata
 .env
 .env.prod
