@@ -38,6 +38,11 @@ if [ "$3" = 'standalone' ]; then
   sudo echo "DB_PASSWORD=$9" >> /var/www/localhost/.env
 fi
 
+if test -f "/var/www/localhost/.env"; then
+    sudo chgrp docker /var/www/localhost/.env
+    sudo chmod 775 /var/www/localhost/.env
+fi
+
 echo ">>>>>> php artisan key:generate <<<<<<"
 php artisan key:generate
 
