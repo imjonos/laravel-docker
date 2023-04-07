@@ -4,6 +4,8 @@ services:
     container_name: webserver${NAME_PPREFIX}
     stdin_open: true
     tty: true
+    depends_on:
+      - mysql
     build:
       context: ./
       dockerfile: Apache.DockerFile
