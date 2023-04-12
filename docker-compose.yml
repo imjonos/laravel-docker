@@ -5,7 +5,7 @@ services:
     stdin_open: true
     tty: true
     depends_on:
-      - mysql
+      - mariadb
     build:
       context: ./
       dockerfile: Apache.DockerFile
