@@ -17,7 +17,6 @@ services:
         - 'INSTALL_SUPERVISOR=${INSTALL_SUPERVISOR}'
         - 'USER=${APACHE2_OS_USER}'
         - 'PW=${APACHE2_OS_PASSWORD}'
-        - 'INSTALL_TYPE=${APACHE2_VOLUME_INSTALL_TYPE}'
         - 'ROOT_PW=${APACHE2_OS_ROOT_PASSWORD}'
     ports:
       - '${APACHE2_HTTP_PORT}:80'
