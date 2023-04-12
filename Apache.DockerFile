@@ -56,7 +56,7 @@ RUN pecl install imagick && docker-php-ext-enable imagick
 ARG INSTALL_MC=false
 # Install MC
 
-RUN if [ ${INSTALL_XDEBUG} = true ]; then \
+RUN if [ ${INSTALL_MC} = true ]; then \
     apt-get install -y mc \
 ;fi
 
