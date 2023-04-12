@@ -119,6 +119,23 @@ RUN if [ ${INSTALL_CRON} = true ]; then \
     crontab /etc/cron.d/schelduler-cron \
 ;fi
 
+ARG INSTALL_TYPE=hosted
+RUN mkdir /var/www/tmp
+COPY ./source /var/www/tmp
+
+ENV APP_URL=http://localhost:8081
+ENV DB_HOST=mariadb
+ENV DB_PORT=3306
+ENV DB_DATABASE=docker
+ENV DB_USERNAME=docker
+ENV DB_PASSWORD=docker
+
+RUN if [ ${INSTALL_TYPE} = standalone ]; then \
+    cp -r /var/www/tmp/* /var/www/localhost \
+    && cp /var/www/tmp/production.env /var/www/localhost/.env \
+;fi
+RUN rm -rf /var/www/tmp
+
 # SSH
 RUN mkdir /var/run/sshd
 
