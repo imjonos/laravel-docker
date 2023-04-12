@@ -11,7 +11,6 @@ RUN apt-get install -y \
     sudo \
     unzip \
     supervisor \
-    mc \
     libicu-dev \
     libxml2-dev \
     libbz2-dev \
@@ -53,6 +52,13 @@ RUN docker-php-ext-install \
     zip
 
 RUN pecl install imagick && docker-php-ext-enable imagick
+
+ARG INSTALL_MC=false
+# Install MC
+
+RUN if [ ${INSTALL_XDEBUG} = true ]; then \
+    apt-get install -y mc \
+;fi
 
 ARG INSTALL_XDEBUG=false
 # Install xdebug
