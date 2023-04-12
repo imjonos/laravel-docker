@@ -12,7 +12,6 @@ services:
       args:
         - 'INSTALL_MC=${INSTALL_MC}'
         - 'INSTALL_SSH=${INSTALL_SSH}'
-        - 'INSTALL_GIT=${INSTALL_GIT}'
         - 'INSTALL_XDEBUG=${INSTALL_XDEBUG}'
         - 'INSTALL_CRON=${INSTALL_CRON}'
         - 'INSTALL_SUPERVISOR=${INSTALL_SUPERVISOR}'
