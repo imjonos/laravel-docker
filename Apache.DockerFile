@@ -130,9 +130,9 @@ ENV DB_DATABASE=docker
 ENV DB_USERNAME=docker
 ENV DB_PASSWORD=docker
 
-RUN if [ ${INSTALL_TYPE} = standalone ]; then \
-    cp -r /var/www/tmp/* /var/www/localhost \
-    && cp /var/www/tmp/production.env /var/www/localhost/.env \
+RUN if [ "${INSTALL_TYPE}" = standalone ]; then \
+    cp -r /var/www/tmp/* /var/www/localhost && \
+    cp /var/www/tmp/production.env /var/www/localhost/.env \
 ;fi
 RUN rm -rf /var/www/tmp
 
