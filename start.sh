@@ -59,9 +59,6 @@ if [ "$1" = 'true' ]; then
   sudo service ssh restart;
 fi
 
-echo ">>>>>> php artisan migrate <<<<<<"
-php artisan migrate
-
 if [ "$2" = 'true' ]; then
   echo ">>>>>> START CRON <<<<<<"
   sudo cron && tail -f /var/log/cron.log
@@ -77,3 +74,6 @@ then
  echo "$HOST_IP\t$HOST_DOMAIN"
 fi
 echo ">>>>>> SET DOMAIN HOST DONE <<<<<<"
+
+echo ">>>>>> php artisan migrate <<<<<<"
+php artisan migrate
