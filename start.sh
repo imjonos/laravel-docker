@@ -59,11 +59,6 @@ if [ "$1" = 'true' ]; then
   sudo service ssh restart;
 fi
 
-if [ "$2" = 'true' ]; then
-  echo ">>>>>> START CRON <<<<<<"
-  sudo cron && tail -f /var/log/cron.log
-fi
-
 set -e
 echo ">>>>>> SET DOMAIN HOST <<<<<<"
 HOST_DOMAIN="host.docker.internal"
@@ -77,3 +72,8 @@ echo ">>>>>> SET DOMAIN HOST DONE <<<<<<"
 
 echo ">>>>>> php artisan migrate <<<<<<"
 php artisan migrate
+
+if [ "$2" = 'true' ]; then
+  echo ">>>>>> START CRON <<<<<<"
+  sudo cron && tail -f /var/log/cron.log
+fi
