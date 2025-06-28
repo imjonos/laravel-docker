@@ -75,3 +75,15 @@ services:
       - ${REDIS_PORT}:6379
     expose:
       - "6379"
+  fake-smtp-server:
+    image: gessnerfl/fake-smtp-server:2.2.1
+    container_name: fake-smtp-server${NAME_PPREFIX}
+    hostname: "fake-smtp-server"
+    restart: always
+    environment:
+      - FAKESMTP_AUTHENTICATION_USERNAME=${FAKESMTP_USERNAME}
+      - FAKESMTP_AUTHENTICATION_PASSWORD=${FAKESMTP_PASSWORD}
+    ports:
+      - ${FAKESMTP_SMTP_PORT}:8025
+      - ${FAKESMTP_WEBUI_PORT}:8080
+      - ${FAKESMTP_API_PORT}:8081
